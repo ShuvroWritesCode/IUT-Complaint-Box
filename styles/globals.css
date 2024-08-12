@@ -161,7 +161,7 @@ input[type="checkbox"] {
     }
   
     .table th {
-      background-color: #4a5568;
+      background-color: #ce4031;
       color: #fff;
       text-align: left;
     }
@@ -184,14 +184,14 @@ input[type="checkbox"] {
   
     .table th,
     .table td {
-      padding: 0.5rem;
+      padding: 1rem;
       border-bottom: 1px solid #e2e8f0;
     }
   
     .table th {
-      background-color: #4a5568;
+      background-color: #ce4031;
       color: #fff;
-      text-align: left;
+      text-align: center;
     }
   
     .table td {
