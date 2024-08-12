@@ -39,7 +39,7 @@ table {
     overflow: hidden;
 }
   
-th, td {
+td {
     padding: 1rem;
     border: 1px solid #ddd;
     text-align: left;
@@ -47,13 +47,18 @@ th, td {
   
 th {
     background-color: #ce4031;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-style: normal;
+    font-size: small;
+    font-weight: 200;
 }
   
 .btn {
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
-    background-color: #d24c4c; /* Changed to red */
+    background-color: #d24c4c; 
     color: #ffffff;
     text-decoration: none;
     text-align: center;
