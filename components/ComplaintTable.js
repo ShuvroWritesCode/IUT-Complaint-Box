@@ -82,7 +82,7 @@ const ComplaintTable = () => {
     <div className="min-w-full w-full overflow-x-auto">
       {isMobile ? (
         // Mobile view
-    <div className="grid grid-cols-1 gap-4">
+    <div className="grid grid-cols-1 gap-4 break-words">
           {complaints.map((complaint, index) => (
             <div key={index} className="bg-white rounded-md p-4 mb-4">
               <div><strong>Timestamp:</strong> {new Date(complaint.timestamp.toDate()).toLocaleString()}</div>
@@ -96,59 +96,60 @@ const ComplaintTable = () => {
           ))}
         </div>
       ) : (
-        // Tablet and Desktop view
-        <table className="mb-5 font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
-          <thead className="text-md text-white">
-            <tr>
-              <th onClick={() => handleSort('timestamp')} className="cursor-pointer px-4 py-2 border-b text-center">
-                Timestamp {sortColumn === 'timestamp' && (sortDirection === 'asc' ? '🔼' : '🔽')}
-              </th>
-              <th onClick={() => handleSort('department')} className="cursor-pointer px-4 py-2 border-b text-center">
-                Department {sortColumn === 'department' && (sortDirection === 'asc' ? '🔼' : '🔽')}
-              </th>
-              <th onClick={() => handleSort('batch')} className="cursor-pointer px-4 py-2 border-b text-center">
-                Batch {sortColumn === 'batch'}
-              </th>
-              <th className="px-4 py-2 border-b text-center">Tags</th>
-              <th className="px-4 py-2 border-b text-center">Complaint</th>
-              <th onClick={() => handleSort('status')} className="cursor-pointer px-4 py-2 border-b text-center">
-                Status {sortColumn === 'status'}
-              </th>
-              <th className="px-4 py-2 border-b text-center">Feedback</th>
-            </tr>
-          </thead>
-          <tbody>
-            {complaints.map((complaint, index) => (
-              <tr key={index}>
-                <td className="px-4 py-2 border-b">{new Date(complaint.timestamp.toDate()).toLocaleString()}</td>
-                <td className="px-4 py-2 border-b text-center">
-                  <span className={`flex w-auto h-6 rounded-full items-center justify-center ${getDeptClass(complaint.department)}`}>
-                    {complaint.department || ''}
-                  </span>
-                </td>
-                <td className="px-4 py-2 border-b text-center">{complaint.batch || ''}</td>
-                <td className="text-sm px-4 py-2 border-b">
-                  {Array.isArray(complaint.tags) && complaint.tags.length > 0 ? (
-                    <div className="flex flex-wrap gap-2 text-xs">
-                      {complaint.tags.map((tag, idx) => (
-                        <span key={idx} className=" text-red-pastel px-2 py-1 rounded-full border border-red-pastel">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  ) : ''}
-                </td>
-                <td className="px-4 py-2 border-b break-words">{complaint.complaint || ''}</td>
-                <td className="px-4 py-2 border-b text-center">
-                  <span className={`flex w-18 h-6 rounded-full items-center justify-center ${getStatusClass(complaint.status)}`}>
-                    {complaint.status || 'Submitted'}
-                  </span>
-                </td>
-                <td className="px-4 py-2 border-b text-left text-justify break-words">{complaint.feedback || ''}</td>
+        <div className="table-container">
+          <table className="table mb-5 font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
+            <thead className="text-md text-white">
+              <tr>
+                <th onClick={() => handleSort('timestamp')} className="cursor-pointer px-4 py-2 border-b text-center">
+                  Timestamp {sortColumn === 'timestamp' && (sortDirection === 'asc' ? '🔼' : '🔽')}
+                </th>
+                <th onClick={() => handleSort('department')} className="cursor-pointer px-4 py-2 border-b text-center">
+                  Department {sortColumn === 'department' && (sortDirection === 'asc' ? '🔼' : '🔽')}
+                </th>
+                <th onClick={() => handleSort('batch')} className="cursor-pointer px-4 py-2 border-b text-center">
+                  Batch {sortColumn === 'batch'}
+                </th>
+                <th className="px-4 py-2 border-b text-center">Tags</th>
+                <th className="px-4 py-2 border-b text-center">Complaint</th>
+                <th onClick={() => handleSort('status')} className="cursor-pointer px-4 py-2 border-b text-center">
+                  Status {sortColumn === 'status'}
+                </th>
+                <th className="px-4 py-2 border-b text-center">Feedback</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {complaints.map((complaint, index) => (
+                <tr key={index}>
+                  <td className="px-4 py-2 border-b">{new Date(complaint.timestamp.toDate()).toLocaleString()}</td>
+                  <td className="px-4 py-2 border-b text-center">
+                    <span className={`flex w-auto h-6 rounded-full items-center justify-center ${getDeptClass(complaint.department)}`}>
+                      {complaint.department || ''}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2 border-b text-center">{complaint.batch || ''}</td>
+                  <td className="text-sm px-4 py-2 border-b">
+                    {Array.isArray(complaint.tags) && complaint.tags.length > 0 ? (
+                      <div className="flex flex-wrap gap-2 text-xs">
+                        {complaint.tags.map((tag, idx) => (
+                          <span key={idx} className=" text-red-pastel px-2 py-1 rounded-full border border-red-pastel">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : ''}
+                  </td>
+                  <td className="px-4 py-2 border-b break-words">{complaint.complaint || ''}</td>
+                  <td className="px-4 py-2 border-b text-center">
+                    <span className={`flex w-18 h-6 rounded-full items-center justify-center ${getStatusClass(complaint.status)}`}>
+                      {complaint.status || 'Submitted'}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2 border-b text-left text-justify break-words">{complaint.feedback || ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
