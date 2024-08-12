@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+/* styles/globals.css */
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #fcfcfa;
+}
+
+  
+header {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #fcfcfa; /* Keep header color or change if needed */
+    color: #fcfcfa;
+    padding: 3rem 2rem;
+    color: black;
+}
+  
+.container {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    overflow: hidden;
+}
+  
+th, td {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+  
+th {
+    background-color: #ce4031;
+}
+  
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #d24c4c; /* Changed to red */
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+form {
+    background-color: #fcfcfa;
+}
+  
+input[type="text"], input[type="email"], textarea {
+    border: 2px solid #d1d5db; /* Red border */
+    border-radius: 4px;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+  
+button {
+    background-color: #ce4031; /* Button color */
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Custom cursor blinking */
+.cursor-blink::placeholder {
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #b91c1c; /* Red color for blinking cursor */
+    }
+}
+
+/* Custom checkbox styles */
+input[type="checkbox"] {
+    appearance: none; /* Remove default appearance */
+    background-color: #ffffff; /* Default background */
+    border: 2px solid #c73d3dd1; /* Border color */
+    border-radius: 0.25rem; /* Rounded corners */
+    width: 1rem; /* Width of the checkbox */
+    height: 1rem; /* Height of the checkbox */
+    position: relative; /* Position relative for custom checkmark */
+    cursor: pointer; /* Pointer cursor for clickable */
+  }
+  
+  input[type="checkbox"]:checked {
+    background-color: #b91c1c; /* Background color when checked */
+    border: 2px solid #b91c1c; /* Border color when checked */
+  }
+  
+  input[type="checkbox"]:checked::before {
+    content: ''; /* Empty content for checkmark */
+    position: absolute; /* Position the checkmark */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 0.5rem; /* Size of the checkmark */
+    height: 0.5rem; /* Size of the checkmark */
+    background-color: #ffffff; /* Checkmark color */
+    clip-path: polygon(0 0, 100% 100%, 0 100%, 100% 0); /* Checkmark shape */
+    transform: translate(-50%, -50%); /* Center the checkmark */
+  }
+  
+  input[type="checkbox"]:focus {
+    outline: none; /* Remove default focus outline */
+  }
+
+  /* Example for the tag text area */
+.tag-container {
+    z-index: 10; /* Lower than the modal's z-index */
+  }
+  
+  /* Ensure the modal is higher */
+  .modal-container {
+    z-index: 50;
+  }
+  
+  
