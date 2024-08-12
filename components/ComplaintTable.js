@@ -8,8 +8,6 @@ const ComplaintTable = () => {
   const [sortColumn, setSortColumn] = useState('timestamp');
   const [sortDirection, setSortDirection] = useState('desc');
 
-  const isDesktop = useMediaQuery({ minWidth: 1024 });
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   useEffect(() => {
@@ -84,7 +82,7 @@ const ComplaintTable = () => {
     <div className="min-w-full w-full overflow-x-auto">
       {isMobile ? (
         // Mobile view
-        <div className="grid grid-cols-1 gap-4">
+    <div className="grid grid-cols-1 gap-4">
           {complaints.map((complaint, index) => (
             <div key={index} className="bg-white rounded-md p-4 mb-4">
               <div><strong>Timestamp:</strong> {new Date(complaint.timestamp.toDate()).toLocaleString()}</div>
@@ -99,7 +97,7 @@ const ComplaintTable = () => {
         </div>
       ) : (
         // Tablet and Desktop view
-        <table className="mb-5 font-serif text-sm w-full border-collapse rounded-xl overflow-hidden">
+        <table className="mb-5 font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
           <thead className="text-md text-white">
             <tr>
               <th onClick={() => handleSort('timestamp')} className="cursor-pointer px-4 py-2 border-b text-center">
