@@ -128,7 +128,7 @@ const ComplaintForm = () => {
           </div>
           <div className="mb-4">
             <label className="block py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">Department</label>
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="mt-4 grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {departments.map(department => (
                 <label key={department} className="flex items-center p-2 border-2 border-gray-300 rounded-md cursor-pointer hover:border-red-pastel">
                   <input
