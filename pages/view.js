@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 export default function View() {
   return (
-    <>
+    < >
       <Head>
         <title>View - IUT Complaint Box</title>
       </Head>
