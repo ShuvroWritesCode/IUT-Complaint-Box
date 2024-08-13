@@ -11,10 +11,9 @@ export default function View() {
       </Head>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex py-1 px-8">
-          <div className="container border-2 border-red-pastel rounded-xl">
-            <h1 className="block mt-5 mb-5 py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">View</h1>
-            <ComplaintTable />
+        <main className="flex py-1 px-1">
+          <div className="container mx-auto max-w-2xl">
+            <ComplaintTable /> 
           </div>
         </main>
       </div>
