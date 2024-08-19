@@ -15,6 +15,9 @@ body {
     background-color: #fcfcfa;
 }
 
+.blurred {
+  filter: blur(50px);
+}
   
 header {
     font-family: 'Helvetica Neue', Arial, sans-serif;

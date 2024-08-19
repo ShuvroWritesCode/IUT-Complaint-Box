@@ -6,7 +6,7 @@ const ComplaintTable = () => {
   const [complaints, setComplaints] = useState([]);
   const [sortColumn, setSortColumn] = useState('timestamp');
   const [sortDirection, setSortDirection] = useState('desc');
-  const [isMobile, setIsMobile] = useState(false); 
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const fetchComplaints = async () => {
@@ -87,14 +87,14 @@ const ComplaintTable = () => {
   };
 
   return (
-    <div className="w-fit rounded-xl">
+    <div className="w-full overflow-auto rounded-xl">
       {isMobile ? (
         <div className="font-serif text-sm mb-4 py-5 px-5 text-center text-red-pastel">
           <p>This table cannot be viewed on mobile devices.</p>
           <p>Please switch to desktop mode for a better experience.</p>
         </div>
       ) : (
-        <table className="mb-5 font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
+        <table className="min-w-max font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
           <thead className="text-md text-white">
             <tr>
               <th onClick={() => handleSort('timestamp')} className="cursor-pointer px-4 py-2 border-b text-center w-1/6">
@@ -124,7 +124,7 @@ const ComplaintTable = () => {
                   </span>
                 </td>
                 <td className="px-4 py-2 border-b text-center">{complaint.batch || ''}</td>
-                <td className="text-sm px-4 py-2 border-b">
+                <td className={`text-sm px-4 py-2 border-b ${complaint.status === 'Submitted' ? 'filter blur-sm' : ''}`}>
                   {Array.isArray(complaint.tags) && complaint.tags.length > 0 ? (
                     <div className="flex flex-wrap gap-2 text-xs">
                       {complaint.tags.map((tag, idx) => (
@@ -135,13 +135,15 @@ const ComplaintTable = () => {
                     </div>
                   ) : ''}
                 </td>
-                <td className="px-4 py-2 border-b break-words">{complaint.complaint || ''}</td>
+                <td className={`px-4 py-2 border-b break-words ${complaint.status === 'Submitted' ? 'filter blur-sm' : ''}`}>
+                  {complaint.complaint || ''}
+                </td>
                 <td className="px-4 py-2 border-b text-center">
                   <span className={`flex w-18 h-6 rounded-full items-center justify-center ${getStatusClass(complaint.status)}`}>
                     {complaint.status || 'Submitted'}
                   </span>
                 </td>
-                <td className="px-4 py-2 border-b text-left text-justify break-words">{complaint.feedback || ''}</td>
+                <td className="px-4 py-2 border-b text-left break-words">{complaint.feedback || ''}</td>
               </tr>
             ))}
           </tbody>

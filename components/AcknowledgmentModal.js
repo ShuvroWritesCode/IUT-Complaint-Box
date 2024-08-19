@@ -21,7 +21,7 @@ const AcknowledgmentModal = ({ department, batch, onAcknowledge, onClose }) => {
         </p>
         <button
           onClick={onAcknowledge}
-          className="mt-4 -mb-4 font-serif bg-red-pastel text-white px-6 py-2 rounded-lg shadow-sm hover:bg-black"
+          className="mt-4 -mb-4 font-serif bg-red-pastel items-center justify-center text-center text-white px-6 py-2 rounded-lg shadow-sm hover:bg-black"
         >
           Acknowledge
         </button>
