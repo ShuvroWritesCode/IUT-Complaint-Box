@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
-import { firestore } from '../services/firebase';
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { firestore, storage } from '../services/firebase';
+import { XMarkIcon, PaperClipIcon } from '@heroicons/react/24/outline';
 import AnonymousCheckbox from '../components/AnonymousCheckbox';
 import Notification from '../components/Notification';
 import AcknowledgmentModal from '../components/AcknowledgmentModal';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const departments = ['CSE', 'EEE', 'MPE', 'CEE', 'BTM', 'TVE'];
 const batches = ['Batch 20', 'Batch 21', 'Batch 22', 'Batch 23'];
@@ -22,6 +23,8 @@ const ComplaintForm = () => {
   const [notification, setNotification] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalAcknowledged, setModalAcknowledged] = useState(false);
+  const [file, setFile] = useState(null); // State for file input
+  const [fileError, setFileError] = useState(''); // State for file size error
 
   const handleTagInput = (e) => {
     if (e.key === 'Enter' && tagInput.trim()) {
@@ -37,7 +40,34 @@ const ComplaintForm = () => {
     setTags(tags.filter(t => t !== tag));
   };
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      if (selectedFile.size > 5 * 1024 * 1024) { // Check if file size > 5MB
+        setFileError('File size exceeds 5MB.');
+      } else {
+        setFile(selectedFile);
+        setFileError('');
+      }
+    }
+  };
+
+  const uploadFile = async () => {
+    if (file) {
+      const fileRef = ref(storage, `complaints/${file.name}`);
+      await uploadBytes(fileRef, file);
+      const fileURL = await getDownloadURL(fileRef);
+      return fileURL;
+    }
+    return null;
+  };
+
   const submitComplaint = async () => {
+    let fileURL = '';
+    if (file) {
+      fileURL = await uploadFile();
+    }
+
     const complaintData = {
       complaint,
       ...(anonymous ? {} : { department: selectedDepartment, batch: selectedBatch }),
@@ -46,6 +76,7 @@ const ComplaintForm = () => {
       email,
       status,
       feedback,
+      fileURL, // Add file URL to complaint data
       timestamp: Timestamp.fromDate(new Date()),
     };
 
@@ -61,6 +92,7 @@ const ComplaintForm = () => {
       setEmail('');
       setStatus('Submitted');
       setFeedback('');
+      setFile(null);
     } catch (error) {
       console.error('Error submitting complaint:', error);
       setNotification({ message: 'Error submitting your complaint.', type: 'error' });
@@ -117,14 +149,32 @@ const ComplaintForm = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="complaint" className="block py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">Complaint</label>
-            <textarea
-              id="complaint"
-              value={complaint}
-              onChange={(e) => setComplaint(e.target.value)}
-              placeholder="Describe your complaint"
-              rows="4"
-              className="font-serif text-sm mt-4 block w-full border-2 border-gray-300 rounded-md focus:ring-0 p-3"
-            />
+            <div className="relative">
+              <textarea
+                id="complaint"
+                value={complaint}
+                onChange={(e) => setComplaint(e.target.value)}
+                placeholder="Describe your complaint"
+                rows="4"
+                className="font-serif text-sm mt-4 block w-full border-2 border-gray-300 rounded-md focus:ring-0 p-3"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="absolute bottom-2 right-2"
+              />
+              <button
+                type="button"
+                onClick={() => document.querySelector('input[type="file"]').click()}
+                className="absolute bottom-2 right-2"
+              >
+                <PaperClipIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
+              {fileError && (
+                <p className="text-red-500 text-xs mt-1">{fileError}</p>
+              )}
+            </div>
           </div>
           <div className="mb-4">
             <label className="block py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">Department</label>

@@ -1,5 +1,7 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore'; // Example for Firestore
+// services/firebase.js
+import { getApps, getApp, initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -10,12 +12,12 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase if it hasn't been initialized already
-if (!getApps().length) {
-  initializeApp(firebaseConfig);
-}
+// Initialize Firebase only if it hasn't been initialized already
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const storage = getStorage(app);
 
-// Initialize Firestore and other services as needed
-const firestore = getFirestore();
+// Initialize Firestore and Storage
+const firestore = getFirestore(app);
 
-export { firestore };
+// Export initialized services
+export { firestore, storage };
