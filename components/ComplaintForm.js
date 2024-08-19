@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { firestore, storage } from '../services/firebase';
-import { XMarkIcon, PaperClipIcon } from '@heroicons/react/24/outline';
+import { DownloadIcon, XMarkIcon, PaperClipIcon } from '@heroicons/react/24/outline';
 import AnonymousCheckbox from '../components/AnonymousCheckbox';
 import Notification from '../components/Notification';
 import AcknowledgmentModal from '../components/AcknowledgmentModal';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const departments = ['CSE', 'EEE', 'MPE', 'CEE', 'BTM', 'TVE'];
-const batches = ['Batch 20', 'Batch 21', 'Batch 22', 'Batch 23'];
+const batches = ['1st Year', '2nd Year', '3rd Year', '4th Year', 'Others'];
 
 const ComplaintForm = () => {
   const [complaint, setComplaint] = useState('');
@@ -148,29 +148,33 @@ const ComplaintForm = () => {
         )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="complaint" className="block py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">Complaint</label>
+            <label htmlFor="complaint" className="block py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">
+              Complaint
+            </label>
             <div className="relative">
               <textarea
                 id="complaint"
                 value={complaint}
                 onChange={(e) => setComplaint(e.target.value)}
                 placeholder="Describe your complaint"
-                rows="6"
+                rows="7"
                 className="font-serif text-sm mt-4 block w-full border-2 border-gray-300 rounded-md focus:ring-0 p-3"
               />
+              {/* For larger screens */}
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleFileChange}
-                className="absolute bottom-2 right-2"
+                className="absolute bottom-2 right-2 hidden sm:block"
               />
-              {/* <button
+              {/* For mobile view */}
+              <button
                 type="button"
                 onClick={() => document.querySelector('input[type="file"]').click()}
-                className="absolute bottom-2 left-40"
+                className="absolute bottom-2 right-2 block sm:hidden"
               >
                 <PaperClipIcon className="h-5 w-5" aria-hidden="true" />
-              </button> */}
+              </button>
               {fileError && (
                 <p className="text-red-500 text-xs mt-1">{fileError}</p>
               )}
@@ -197,7 +201,7 @@ const ComplaintForm = () => {
           </div>
           <div className="mb-4">
             <label className="block py-2 px-4 bg-red-pastel font-medium font-serif rounded-md text-md text-white">Batch</label>
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3">
               {batches.map(batch => (
                 <label key={batch} className="flex items-center p-2 border-2 border-gray-300 rounded-md cursor-pointer hover:border-red-pastel">
                   <input

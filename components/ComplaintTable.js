@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../services/firebase';
+import { ArrowDownTrayIcon, PaperClipIcon } from '@heroicons/react/24/outline';
 
 const ComplaintTable = () => {
   const [complaints, setComplaints] = useState([]);
@@ -86,6 +87,23 @@ const ComplaintTable = () => {
     return data;
   };
 
+  const handleDownload = async (fileURL) => {
+    try {
+      const response = await fetch(fileURL);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'file';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading the file!', error);
+    }
+  };  
+
   return (
     <div className="w-full overflow-auto rounded-xl">
         <table className="min-w-max font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
@@ -105,7 +123,8 @@ const ComplaintTable = () => {
               <th onClick={() => handleSort('status')} className="cursor-pointer px-4 py-2 border-b text-center w-1/6">
                 Status {sortColumn === 'status' && (sortDirection === 'asc' ? '🔼' : '🔽')}
               </th>
-              <th className="px-4 py-2 border-b text-center w-2/6">Feedback</th>
+              <th className="px-4 py-2 border-b text-center w-1/6">Media</th>
+              <th className="px-4 py-2 border-b text-center w-1/6">Feedback</th>
             </tr>
           </thead>
           <tbody>
@@ -136,6 +155,22 @@ const ComplaintTable = () => {
                   <span className={`flex w-18 h-6 rounded-full items-center justify-center ${getStatusClass(complaint.status)}`}>
                     {complaint.status || 'Submitted'}
                   </span>
+                </td>
+                <td className={`px-4 py-2 border-b text-center ${complaint.status === 'Submitted' ? 'filter blur-sm' : ''}`}>
+                  {complaint.fileURL && (
+                    <button
+                      onClick={() => {
+                        if (complaint.status !== 'Submitted') {
+                          handleDownload(complaint.fileURL);
+                        }
+                      }}
+                      className={`bg-white text-red-pastel hover:text-gray-800 ${complaint.status === 'Submitted' ? 'cursor-not-allowed opacity-50' : ''}`}
+                      title="Download"
+                      disabled={complaint.status === 'Submitted'} // Disables the button if status is 'Submitted'
+                    >
+                      <ArrowDownTrayIcon className="h-5 w-5" aria-hidden="true" />
+                    </button>
+                  )}
                 </td>
                 <td className="px-4 py-2 border-b text-left break-words">{complaint.feedback || ''}</td>
               </tr>
