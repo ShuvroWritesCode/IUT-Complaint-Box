@@ -7,7 +7,7 @@ const ComplaintTable = () => {
   const [complaints, setComplaints] = useState([]);
   const [sortColumn, setSortColumn] = useState('timestamp');
   const [sortDirection, setSortDirection] = useState('desc');
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const fetchComplaints = async () => {
@@ -105,7 +105,7 @@ const ComplaintTable = () => {
   };  
 
   return (
-    <div className="w-full overflow-auto rounded-xl table-container ">
+    <div className="table-container">
         <table className="min-w-max font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
           <thead className="text-md text-white">
             <tr>
