@@ -1,12 +1,11 @@
-// components/Notification.js
 import React from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
 const Notification = ({ message, type, onClose }) => {
   const notificationStyles = {
-    success: 'font-semibold bg-green-100 text-green-700 border-2 border-green-500',
-    error: 'font-semibold bg-red-100 text-red-500 border-2 border-red-500',
-    info: 'font-semibold bg-blue-100 text-blue-700 border-2 border-blue-500',
+    success: 'z-10 font-semibold bg-green-100 text-green-700 border-2 border-green-500',
+    error: 'z-10 font-semibold bg-red-100 text-red-500 border-2 border-red-500',
+    info: 'z-10 font-semibold bg-blue-100 text-blue-700 border-2 border-blue-500',
   };
 
   return (
