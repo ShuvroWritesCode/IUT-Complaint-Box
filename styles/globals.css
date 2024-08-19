@@ -79,6 +79,16 @@ input[type="text"], input[type="email"], textarea {
     width: 100%;
     box-sizing: border-box;
 }
+
+input[type="file"] {
+  background-color: #ce4031; /* Button color */
+  color: #ce4031;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 10%;
+
+}
   
 button {
     background-color: #ce4031; /* Button color */

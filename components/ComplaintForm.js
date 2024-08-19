@@ -155,7 +155,7 @@ const ComplaintForm = () => {
                 value={complaint}
                 onChange={(e) => setComplaint(e.target.value)}
                 placeholder="Describe your complaint"
-                rows="4"
+                rows="6"
                 className="font-serif text-sm mt-4 block w-full border-2 border-gray-300 rounded-md focus:ring-0 p-3"
               />
               <input
@@ -164,13 +164,13 @@ const ComplaintForm = () => {
                 onChange={handleFileChange}
                 className="absolute bottom-2 right-2"
               />
-              <button
+              {/* <button
                 type="button"
                 onClick={() => document.querySelector('input[type="file"]').click()}
-                className="absolute bottom-2 right-2"
+                className="absolute bottom-2 left-40"
               >
                 <PaperClipIcon className="h-5 w-5" aria-hidden="true" />
-              </button>
+              </button> */}
               {fileError && (
                 <p className="text-red-500 text-xs mt-1">{fileError}</p>
               )}

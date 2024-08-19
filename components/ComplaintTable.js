@@ -88,12 +88,6 @@ const ComplaintTable = () => {
 
   return (
     <div className="w-full overflow-auto rounded-xl">
-      {isMobile ? (
-        <div className="font-serif text-sm mb-4 py-5 px-5 text-center text-red-pastel">
-          <p>This table cannot be viewed on mobile devices.</p>
-          <p>Please switch to desktop mode for a better experience.</p>
-        </div>
-      ) : (
         <table className="min-w-max font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
           <thead className="text-md text-white">
             <tr>
@@ -148,7 +142,6 @@ const ComplaintTable = () => {
             ))}
           </tbody>
         </table>
-      )}
     </div>
   );
 };
