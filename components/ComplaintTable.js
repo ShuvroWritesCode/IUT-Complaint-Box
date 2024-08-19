@@ -105,7 +105,7 @@ const ComplaintTable = () => {
   };  
 
   return (
-    <div className="w-full overflow-auto rounded-xl">
+    <div className="w-full overflow-auto rounded-xl table-container ">
         <table className="min-w-max font-serif text-xs w-full border-collapse rounded-xl overflow-hidden">
           <thead className="text-md text-white">
             <tr>

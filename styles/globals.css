@@ -4,7 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-
 /* styles/globals.css */
 
 body {
@@ -16,9 +15,9 @@ body {
 }
 
 .blurred {
-  filter: blur(50px);
+    filter: blur(50px);
 }
-  
+
 header {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-color: #fcfcfa; /* Keep header color or change if needed */
@@ -26,7 +25,7 @@ header {
     padding: 3rem 2rem;
     color: black;
 }
-  
+
 .container {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     width: 100%;
@@ -34,20 +33,25 @@ header {
     margin: 0 auto;
     padding: 0 1rem;
 }
-  
+
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-bottom: 1rem; /* Spacing for better visuals on mobile */
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    overflow: hidden;
 }
-  
+
 td {
     padding: 1rem;
     border: 1px solid #ddd;
     text-align: left;
 }
-  
+
 th {
     background-color: #ce4031;
     border: 1px solid #ddd;
@@ -56,7 +60,7 @@ th {
     font-size: small;
     font-weight: 200;
 }
-  
+
 .btn {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -71,7 +75,7 @@ th {
 form {
     background-color: #fcfcfa;
 }
-  
+
 input[type="text"], input[type="email"], textarea {
     border: 2px solid #d1d5db; /* Red border */
     border-radius: 4px;
@@ -81,15 +85,14 @@ input[type="text"], input[type="email"], textarea {
 }
 
 input[type="file"] {
-  background-color: #ce4031; /* Button color */
-  color: #ce4031;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 4px;
-  width: 10%;
-
+    background-color: #ce4031; /* Button color */
+    color: #ce4031;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    width: 10%;
 }
-  
+
 button {
     background-color: #ce4031; /* Button color */
     color: white;
@@ -123,14 +126,14 @@ input[type="checkbox"] {
     height: 1rem; /* Height of the checkbox */
     position: relative; /* Position relative for custom checkmark */
     cursor: pointer; /* Pointer cursor for clickable */
-  }
-  
-  input[type="checkbox"]:checked {
+}
+
+input[type="checkbox"]:checked {
     background-color: #b91c1c; /* Background color when checked */
     border: 2px solid #b91c1c; /* Border color when checked */
-  }
-  
-  input[type="checkbox"]:checked::before {
+}
+
+input[type="checkbox"]:checked::before {
     content: ''; /* Empty content for checkmark */
     position: absolute; /* Position the checkmark */
     top: 50%; /* Center vertically */
@@ -140,75 +143,73 @@ input[type="checkbox"] {
     background-color: #ffffff; /* Checkmark color */
     clip-path: polygon(0 0, 100% 100%, 0 100%, 100% 0); /* Checkmark shape */
     transform: translate(-50%, -50%); /* Center the checkmark */
-  }
-  
-  input[type="checkbox"]:focus {
-    outline: none; /* Remove default focus outline */
-  }
+}
 
-  /* Example for the tag text area */
+input[type="checkbox"]:focus {
+    outline: none; /* Remove default focus outline */
+}
+
 .tag-container {
     z-index: 10; /* Lower than the modal's z-index */
-  }
-  
-  /* Ensure the modal is higher */
-  .modal-container {
-    z-index: 50;
-  }
-  
-  @media (min-width: 768px) {
-    .table-container {
-      overflow-x: auto;
-    }
-  
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.75rem;
-    }
-  
-    .table th,
-    .table td {
-      padding: 0.75rem;
-      border-bottom: 1px solid #e2e8f0;
-    }
-  
-    .table th {
-      background-color: #ce4031;
-      color: #fff;
-      text-align: left;
-    }
-  
-    .table td {
-      word-break: break-word;
-    }
-  }
+}
 
-  @media (max-width: 767px) {
+/* Ensure the modal is higher */
+.modal-container {
+    z-index: 50;
+}
+
+@media (min-width: 768px) {
     .table-container {
-      overflow-x: auto;
+        overflow-x: auto;
     }
-  
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.875rem;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.75rem;
     }
-  
-    .table th,
-    .table td {
-      padding: 1rem;
-      border-bottom: 1px solid #e2e8f0;
+
+    th,
+    td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e2e8f0;
     }
-  
-    .table th {
-      background-color: #ce4031;
-      color: #fff;
-      text-align: center;
+
+    th {
+        background-color: #ce4031;
+        color: #fff;
+        text-align: left;
     }
-  
-    .table td {
-      word-break: break-word;
+
+    td {
+        word-break: break-word;
     }
-  }
-  
+}
+
+@media (max-width: 767px) {
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+    }
+
+    th,
+    td {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+        background-color: #ce4031;
+        color: #fff;
+        text-align: center;
+    }
+
+    td {
+        word-break: break-word;
+    }
+}
