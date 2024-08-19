@@ -208,8 +208,4 @@ input[type="checkbox"]:focus {
         color: #fff;
         text-align: center;
     }
-
-    td {
-        word-break: break-word;
-    }
 }
